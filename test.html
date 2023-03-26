@@ -22,25 +22,28 @@ nav {
   display: flex;
   align-items: center;
   padding: 1em 0;
-  column-gap: 0.75em;
+  column-gap: 0.5em;
 }
 
 nav a {
-  font-family: Verdana;
   font: bold 14px Verdana;
   text-decoration: none;
   color: inherit;
 }
 
+nav a:first-child {
+  margin-right: 1em;
+}
+
 nav a img {
-      width: 16px;
-      height: 16px;
-      vertical-align: bottom;
+  width: 16px;
+  height: 16px;
+  vertical-align: bottom;
 }
 
 [alt="Logo"] {
-      width: 32px;
-      height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 nav>a:hover,
@@ -91,7 +94,7 @@ li a:hover {
   <header>
     <nav>
       <a href="/"><img src="images/m.png" alt="Logo"></a>
-      <a href="/" id="current">Home</a>
+      <a href="/" id="current">Home</a> |
       <a href="blog">Blog</a>
       <span>Follow</span>
       <a href="https://twitter.com/Mirmojarabian"><img src="images/social-media/twitter.svg" alt="Twitter"></a>
@@ -100,10 +103,12 @@ li a:hover {
       <a href="https://groups.google.com/g/mori-newsletter"><img src="images/social-media/email.svg" alt="Email"></a>
       <a href="https://wa.me/989132054173"><img src="images/social-media/rss.svg" alt="RSS"></a>
     </nav>
-    <h1><img src="images/mori.jpg" alt="Mori"></h1>
   </header>
 
   <main>
+    <header>
+      <h1><img src="images/mori.jpg" alt="Mori"></h1>
+    </header>
     <h2>About</h2>
     <p>Hi! My name is Morteza Mirmojarabian, but my friends call me Mori. I was born in Isfahan, Iran. I am an English teacher at Iran Language Institute. In my free time, I love sports and music. I am also very much interested in web development, which this website and the articles I post on my blog are mostly about.</p>
     <h2>Contact</h2>
