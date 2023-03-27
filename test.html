@@ -15,7 +15,7 @@
       background: black;
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 1em;
+      padding: 0 1em 1em;
     }
 
     nav {
@@ -26,7 +26,7 @@
     }
 
     nav a {
-      font: bold 14px Verdana;
+      font: bold 0.875em Verdana;
       text-decoration: none;
       color: inherit;
     }
@@ -46,10 +46,13 @@
       height: 32px;
     }
 
-    nav>a:hover,
-    nav>a:focus,
+    nav a:hover,
     #current {
       color: white;
+    }
+
+    nav img:hover {
+      filter: brightness(2);
     }
 
     nav span {
@@ -67,25 +70,26 @@
       vertical-align: bottom;
     }
 
+    p,
+    address,
     li {
-      margin: 1em 0;
+      line-height: 1.5;
+    }
+    address {
+      font-style: normal;
     }
 
-    li a {
+    address a, li a {
       color: dodgerBlue;
       text-underline-position: under;
     }
 
-    li a:hover {
+    address a:hover, li a:hover {
       text-decoration: none;
     }
 
-    address a:not(:last-child) {
-      margin-right: 0.5em;
-    }
-
-    a img:hover {
-      filter: brightness(2);
+    li {
+      margin: 1em 0;
     }
   </style>
 </head>
@@ -102,8 +106,8 @@
       <a href="https://twitter.com/Mirmojarabian"><img src="images/social-media/twitter.svg" alt="Twitter"></a>
       <a href="https://www.facebook.com/MortezaMirmojarabian"><img src="images/social-media/facebook.svg" alt="Facebook"></a>
       <a href="https://www.linkedin.com/in/mortezamirmojarabian"><img src="images/social-media/linkedin.svg" alt="LinkedIn"></a>
-      <a href="https://groups.google.com/g/mori-newsletter"><img src="images/social-media/email.svg" alt="Email"></a>
-      <a href="https://wa.me/989132054173"><img src="images/social-media/rss.svg" alt="RSS"></a>
+      <a href="https://groups.google.com/g/mori-newsletter"><img src="images/social-media/email.svg" alt="Email newsletter"></a>
+      <a href=""><img src="images/social-media/rss.svg" alt="RSS feed"></a>
     </nav>
   </header>
 
