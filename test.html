@@ -127,7 +127,7 @@ nav span {
             <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725 " />
           </g>
         </svg></a>
-      <a href=""><svg fill="#333333" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve" transform="matrix(-1, 0, 0, 1, 0, 0)" stroke="#333333"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M109.722,197.008c-24.163-24.164-23.933-63.574,0.682-87.452c23.912-23.195,62.922-22.505,86.96,1.531l53.695,53.696 c12.68,12.68,33.199,12.679,45.877,0.001l19.383-19.383c12.68-12.679,12.679-33.2,0-45.877l-54.556-54.556 c-60.404-60.404-158.638-59.822-218.363,1.074c-58.744,59.894-57.721,157.439,2.281,217.44l53.339,53.339 c12.68,12.68,33.2,12.679,45.877,0.001l19.383-19.382c12.68-12.68,12.679-33.2,0-45.876L109.722,197.008z"></path> <path d="M467.018,250.225l-54.555-54.555c-12.68-12.68-33.199-12.679-45.877-0.001l-19.383,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l54.556,54.558c24.167,24.164,23.933,63.575-0.682,87.45 c-23.913,23.195-62.922,22.505-86.958-1.531l-53.696-53.696c-12.68-12.68-33.199-12.679-45.876,0l-19.384,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l53.34,53.339c60.005,60.008,157.551,61.021,217.44,2.282 C526.933,408.77,527.41,310.616,467.018,250.225z"></path> <path d="M178.901,160.024l-19.384,19.383c-12.647,12.648-12.647,33.227,0.001,45.875l127.186,127.185 c12.678,12.681,33.199,12.68,45.877,0.001l19.383-19.381c12.68-12.68,12.679-33.2,0-45.877L224.777,160.023 C212.127,147.376,191.548,147.376,178.901,160.024z"></path> </g> </g> </g> </g></svg></a>
+      <a href="" id="x"><svg fill="#333333" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve" transform="matrix(-1, 0, 0, 1, 0, 0)" stroke="#333333"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M109.722,197.008c-24.163-24.164-23.933-63.574,0.682-87.452c23.912-23.195,62.922-22.505,86.96,1.531l53.695,53.696 c12.68,12.68,33.199,12.679,45.877,0.001l19.383-19.383c12.68-12.679,12.679-33.2,0-45.877l-54.556-54.556 c-60.404-60.404-158.638-59.822-218.363,1.074c-58.744,59.894-57.721,157.439,2.281,217.44l53.339,53.339 c12.68,12.68,33.2,12.679,45.877,0.001l19.383-19.382c12.68-12.68,12.679-33.2,0-45.876L109.722,197.008z"></path> <path d="M467.018,250.225l-54.555-54.555c-12.68-12.68-33.199-12.679-45.877-0.001l-19.383,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l54.556,54.558c24.167,24.164,23.933,63.575-0.682,87.45 c-23.913,23.195-62.922,22.505-86.958-1.531l-53.696-53.696c-12.68-12.68-33.199-12.679-45.876,0l-19.384,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l53.34,53.339c60.005,60.008,157.551,61.021,217.44,2.282 C526.933,408.77,527.41,310.616,467.018,250.225z"></path> <path d="M178.901,160.024l-19.384,19.383c-12.647,12.648-12.647,33.227,0.001,45.875l127.186,127.185 c12.678,12.681,33.199,12.68,45.877,0.001l19.383-19.381c12.68-12.68,12.679-33.2,0-45.877L224.777,160.023 C212.127,147.376,191.548,147.376,178.901,160.024z"></path> </g> </g> </g> </g></svg></a>
       <span>Copied!</span>
     </nav>
   </header>
@@ -140,7 +140,9 @@ nav span {
     <p>Hi! My name is Morteza Mirmojarabian, but my friends call me Mori. I was born in Isfahan, Iran. I am an English teacher at Iran Language Institute. In my free time, I love sports and music. I am also very much interested in web development, which this website and the articles I post on my blog are mostly about.</p>
   </main>
 <script>
-navigator.clipboard.writeText('Love').then(
+document.getElementById('x').addEventListener('click', function() {
+
+navigator.clipboard.writeText(window.location.href).then(
   () => {
     console.log('Done!');
   },
@@ -148,6 +150,8 @@ navigator.clipboard.writeText('Love').then(
     console.log('Failed!');
   }
 );
+
+    });
 </script>
 </body>
 
