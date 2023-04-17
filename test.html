@@ -13,13 +13,10 @@ var p = document.querySelector('p');
 function write() {
       if (input.checked) {
           p.textContent = 'Checked!';
-      } 
-else {
-p.textContent = '';
-}
+      }
 }
 
-    input.addEventListener('change', write);
+input.addEventListener('change', write);
 
 write();
 </script>
