@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>HTML Document Template</title>
-  </head>
-  <body>
-    <input type="checkbox">
-    <p></p>
-<script>
-var input = document.querySelector('input');
-var p = document.querySelector('p');
 
-function write() {
-      if (input.checked) {
-          p.textContent = 'Checked!';
-      }
-}
+<head>
+  <title>HTML Document Template</title>
+  <style>
+    body {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      gap: 1em 0.5em;
+    }
+  </style>
+</head>
 
-input.addEventListener('change', write);
+<body>
+  <textarea>Hello, world!</textarea>
+  <span></span>
+  <input type="range">
+  <output></output>
+  <script>
+    var textarea = document.querySelector('textarea');
+    var span = document.querySelector('span');
+    var input = document.querySelector('input');
+    var output = document.querySelector('output');
 
-write();
-</script>
-  </body>
+    function write() {
+      span.textContent = textarea.value;
+      output.textContent = input.value;
+    }
+
+    textarea.addEventListener('input', write);
+    input.addEventListener('input', write);
+
+    write();
+  </script>
+</body>
+
 </html>
