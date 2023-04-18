@@ -14,22 +14,28 @@
 
 <body>
   <textarea>Hello, world!</textarea>
-  <span></span>
+  <p></p>
   <input type="range">
   <output></output>
+  <input type="checkbox">
+  <span></span>
   <script>
     var textarea = document.querySelector('textarea');
-    var span = document.querySelector('span');
-    var input = document.querySelector('input');
+    var p = document.querySelector('p');
+    var range = document.querySelector('input[type="range"]');
     var output = document.querySelector('output');
+    var checkbox = document.querySelector('input[type="checkbox"]');
+    var span = document.querySelector('span');
 
     function write() {
-      span.textContent = textarea.value;
-      output.textContent = input.value;
+      p.textContent = textarea.value;
+      output.textContent = range.value;
+      span.textContent = checkbox.checked;
     }
 
     textarea.addEventListener('input', write);
-    input.addEventListener('input', write);
+    range.addEventListener('input', write);
+    checkbox.addEventListener('change', write);
 
     write();
   </script>
