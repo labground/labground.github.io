@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Edit your HTML, CSS, and JavaScript code and monitor the instant live preview.">
+  <title>HTML Editor: online HTML editor with real-time preview</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header,
+    footer.shown {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 5px;
+    }
+
+    header {
+      background: linear-gradient(#FFF, #CCC);
+      row-gap: 5px;
+    }
+
+    label,
+    #downloader,
+    select,
+    #resetter,
+    #selector,
+    #fileChooser,
+    output {
+      font: bold 11px Arial;
+      color: #333;
+    }
+
+    [type="checkbox"] {
+      margin: 0 10px 0 5px;
+    }
+
+    [for="fontSizer"] {
+      margin: 0 5px 0 10px;
+    }
+
+    select,
+    #selector {
+      margin: 0;
+    }
+
+    #resetter,
+    #resizer {
+      margin: 0 5px;
+    }
+
+    #fileChooser {
+      margin: 0 auto 0 5px;
+    }
+
+    #resizer,
+    iframe {
+      padding: 0;
+    }
+
+    output {
+      margin-right: 10px;
+      font-family: monospace;
+    }
+
+    #footerToggler {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      border: 1px solid #666;
+      border-bottom-width: 5px;
+      padding: 0;
+      background: transparent;
+    }
+
+    #footerToggler.on {
+      border-color: #333;
+      background: #FFF;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+    }
+
+    main.horizontal {
+      flex-direction: column;
+    }
+
+    div {
+      flex-basis: 0;
+      position: relative;
+    }
+
+    #viewerWrapper {
+      border-left: 5px solid #CCC;
+    }
+
+    main.horizontal #viewerWrapper {
+      border-left: 0;
+      border-top: 5px solid #CCC;
+    }
+
+    div * {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+      background: #FFF;
+    }
+
+    textarea {
+      box-sizing: border-box;
+      padding: 5px;
+      outline: 0;
+      resize: none;
+      color: #333;
+    }
+
+    textarea.dark {
+      background: #333;
+      color: #FFF;
+    }
+
+    footer.shown {
+      gap: 5px;
+      background: linear-gradient(#CCC, #FFF);
+    }
+
+    img {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+
+    address {
+      margin-left: auto;
+      font-size: 16px;
+      font-family: 'Times New Roman';
+      color: #333;
+    }
+
+    address a {
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <label for="runner">Run</label>
+    <input type="checkbox" checked id="runner">
+    <a href="" download="template.html" title="Download the HTML document" id="downloader">Download</a>
+    <label for="fontSizer">Font size</label>
+    <select id="fontSizer">
+      <option>12</option>
+      <option>13</option>
+      <option selected>14</option>
+      <option>15</option>
+      <option>16</option>
+      <option>17</option>
+      <option>18</option>
+      <option>19</option>
+      <option>20</option>
+    </select>
+    <button type="button" id="resetter">Reset</button>
+    <button type="button" id="selector">Select</button>
+    <input type="file" accept="text/html" id="fileChooser">
+    <label for="resizer">Editor size</label>
+    <input type="range" id="resizer">
+    <output for="resizer" id="indicator"></output>
+    <label for="viewsToggler">Horizontal view</label>
+    <input type="checkbox" id="viewsToggler">
+    <label for="themesToggler">Dark theme</label>
+    <input type="checkbox" id="themesToggler">
+    <button type="button" title="Toggle footer" id="footerToggler"></button>
+  </header>
+  <main id="main">
+    <div id="editorWrapper">
+      <textarea spellcheck="false" id="editor"><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HTML Document Template</title>
+  </head>
+  <body>
+    <p>Hello, world!</p>
+  </body>
+</html></textarea>
+    </div>
+    <div id="viewerWrapper">
+      <iframe id="viewer"></iframe>
+    </div>
+  </main>
+  <footer hidden id="footer">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Fhtmleditor.gitlab.io" target="_blank" title="Share on LinkedIn"><img src="images/linkedin.svg" alt="LinkedIn"></a>
+    <a href="https://twitter.com/intent/tweet?text=HTML%20Editor%3A%20online%20HTML%20editor%20with%20real-time%20preview&url=http%3A%2F%2Fhtmleditor.gitlab.io" target="_blank" title="Share on Twitter"><img src="images/twitter.svg" alt="Twitter"></a>
+    <a href="https://www.facebook.com/dialog/share?app_id=664554287087112&display=page&href=http%3A%2F%2Fhtmleditor.gitlab.io" target="_blank" title="Share on Facebook"><img src="images/facebook.svg" alt="Facebook"></a>
+    <address><a href="https://codereview.stackexchange.com/questions/56106/html-editor-online-html-editor-with-real-time-preview" title="Code Review Stack Exchange">Feedback</a> | Created by <a href="https://mori.pages.dev" title="Mori" rel="author">Mori</a></address>
+  </footer>
+  <script>
+    var runner = document.getElementById('runner'),
+      editor = document.getElementById('editor'),
+      downloader = document.getElementById('downloader'),
+      fontSizer = document.getElementById('fontSizer'),
+      fileChooser = document.getElementById('fileChooser'),
+      resizer = document.getElementById('resizer'),
+      viewsToggler = document.getElementById('viewsToggler'),
+      themesToggler = document.getElementById('themesToggler');
+
+    function preview() {
+      if (runner.checked) {
+          document.getElementById('viewer').srcdoc = editor.value;
+      }
+    }
+
+    editor.addEventListener('input', preview);
+    runner.addEventListener('change', preview);
+
+    ['click', 'contextmenu'].forEach(event => downloader.addEventListener(event, function() {
+      var blob = new Blob([editor.value], {type: 'text/html'});
+      downloader.href = URL.createObjectURL(blob);
+    }));
+
+    function sizeFont() {
+      editor.style.fontSize = fontSizer.value + 'px';
+    }
+
+    fontSizer.addEventListener('change', sizeFont);
+
+    document.getElementById('resetter').addEventListener('click', function() {
+      if (!editor.value || editor.value != editor.defaultValue && confirm('Your changes will be lost.\nAre you sure you want to reset?')) {
+        downloader.download = 'template.html';
+        fileChooser.value = '';
+        editor.value = editor.defaultValue;
+        preview();
+      } else if (editor.value == editor.defaultValue) {
+        downloader.download = 'template.html';
+        fileChooser.value = '';
+      }
+    });
+
+    document.getElementById('selector').addEventListener('click', function() {
+      editor.select();
+    });
+
+    fileChooser.addEventListener('change', async function() {
+      var file = this.files[0];
+      if (file) { // to ensure that there's a file to read so Chrome, for example, doesn't run this function when you cancel choosing a new file
+        downloader.download = file.name;
+        editor.value = await file.text();
+        preview();
+      }
+    });
+
+    function resize() {
+      var resizerVal = resizer.value;
+      document.getElementById('editorWrapper').style.flexGrow = resizerVal;
+      document.getElementById('viewerWrapper').style.flexGrow = 100 - resizerVal;
+      document.getElementById('indicator').value = (resizerVal / 100).toFixed(2);
+    }
+
+    resizer.addEventListener('input', resize);
+
+    function toggleViews() {
+      var main = document.getElementById('main');
+      if (viewsToggler.checked) {
+        main.className = 'horizontal';
+      } else {
+        main.className = '';
+      }
+    }
+
+    viewsToggler.addEventListener('change', toggleViews);
+
+    function toggleThemes() {
+      if (themesToggler.checked) {
+        editor.className = 'dark';
+      } else {
+        editor.className = '';
+      }
+    }
+
+    themesToggler.addEventListener('change', toggleThemes);
+
+    document.getElementById('footerToggler').addEventListener('click', function() {
+      this.classList.toggle('on');
+      document.getElementById('footer').classList.toggle('shown');
+    });
+
+    window.addEventListener('beforeunload', function(event) {
+      if (editor.value && editor.value != editor.defaultValue) {
+        event.returnValue = 'Your changes may be lost.';
+      }
+    });
+
+    setTimeout(() => {
+      resize();
+      toggleViews();
+      toggleThemes();
+      sizeFont();
+      preview();
+    }, 4);
+  </script>
+</body>
+
+</html>
