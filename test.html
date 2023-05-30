@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An embed code generator and step-by-step instructions to embedding your Google Drive folder in a website">
+  <title>How to Embed a Google Drive Folder in a Web Page</title>
+<base href="https://mori.pages.dev/">
+  <link rel="icon" type="image/png" href="/images/m.png">
+  <link rel="stylesheet" href="/posts.css">
+  <style>
+    form {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 1em;
+      max-width: 17em;
+      margin: 2em auto;
+      padding: 1em;
+      border: 1px solid #dedede;
+      border-radius: 5px;
+      background: #fafafa;
+    }
+
+    label {
+      text-align: right;
+      font-size: smaller;
+    }
+
+    label:not(:last-of-type) {
+      align-self: center;
+    }
+
+    form > *:not(label) {
+      grid-column: 2; /* just for the button */
+      padding: 0.5em;
+      border: 1px solid #dedede;
+      border-radius: 5px;
+    }
+
+    form > *:nth-child(2n) {
+      background: white;
+    }
+
+    input,
+    select,
+    form button:enabled {
+      color: inherit;
+    }
+
+    input:invalid {
+      outline: 2px solid #C00;
+    }
+
+    output {
+      font-family: monospace;
+      height: 8.5em;
+      overflow-wrap: break-word;
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="/"><img src="/images/m.png" width="32" height="32" alt="Logo"></a>
+      <a href="/">Home</a>
+      |
+      <a href="/blog">Blog</a>
+      Follow
+      <a href="https://twitter.com/Mirmojarabian"><svg fill="silver" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M1920 311.856c-70.701 33.769-146.598 56.47-226.221 66.86 81.317-52.517 143.774-135.529 173.252-234.691-76.236 48.678-160.716 84.028-250.391 103.002-71.718-82.56-174.268-134.06-287.435-134.06-217.75 0-394.165 189.966-394.165 424.206 0 33.318 3.614 65.619 10.165 96.678C617.9 616.119 327.304 447.385 133.045 190.67c-33.77 62.57-53.309 135.53-53.309 213.233 0 147.162 91.031 276.818 196.744 353.054-64.602-2.26-157.101-21.46-157.101-53.309v5.648c0 205.327 114.41 376.658 294.55 415.849-32.978 9.487-78.38 14.795-114.409 14.795-25.412 0-55.454-2.71-79.624-7.793 50.26 168.509 193.13 291.163 365.478 294.777-134.852 113.506-306.07 181.383-490.616 181.383-31.85 0-64.038-2.033-94.758-5.873 174.494 120.17 381.176 190.532 603.67 190.532 724.97 0 1121.055-646.136 1121.055-1206.55 0-18.41-.452-36.932-1.356-55.116 77.026-59.746 143.887-134.4 196.631-219.444" fill-rule="evenodd" />
+          </g>
+        </svg></a>
+      <a href="https://www.facebook.com/MortezaMirmojarabian"><svg fill="silver" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 94 94" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M89,0H5C2.239,0,0,2.239,0,5v84c0,2.761,2.239,5,5,5h84c2.762,0,5-2.239,5-5V5C94,2.239,91.762,0,89,0z M66.93,21.364 l-7.226,0.003c-5.664,0-6.761,2.692-6.761,6.643v8.711h13.511L66.45,50.365H52.943v35.012H38.852V50.365H27.07V36.721h11.782 V26.659c0-11.677,7.133-18.036,17.548-18.036L66.93,8.64V21.364z" />
+          </g>
+        </svg></a>
+      <a href="https://www.linkedin.com/in/mortezamirmojarabian"><svg fill="silver" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M72.16,99.73H9.927c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5H72.16c2.762,0,5-2.238,5-5V104.73 C77.16,101.969,74.922,99.73,72.16,99.73z" />
+            <path d="M41.066,0.341C18.422,0.341,0,18.743,0,41.362C0,63.991,18.422,82.4,41.066,82.4 c22.626,0,41.033-18.41,41.033-41.038C82.1,18.743,63.692,0.341,41.066,0.341z" />
+            <path d="M230.454,94.761c-24.995,0-43.472,10.745-54.679,22.954V104.73c0-2.761-2.238-5-5-5h-59.599 c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5h62.097c2.762,0,5-2.238,5-5v-98.918c0-33.333,9.054-46.319,32.29-46.319 c25.306,0,27.317,20.818,27.317,48.034v97.204c0,2.762,2.238,5,5,5H305c2.762,0,5-2.238,5-5V194.995 C310,145.43,300.549,94.761,230.454,94.761z" />
+          </g>
+        </svg></a>
+      <a href="https://groups.google.com/g/mori-newsletter"><svg width="16px" height="16px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="silver">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <polygon points="6,6.3818359 12,2.0180664 12,1 0,1 0,2.0181274" />
+            <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725" />
+          </g>
+        </svg></a>
+      <a href=""><svg fill="silver" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M90.244,264.828C90.244,240.11,70.139,220,45.427,220c-24.715,0-44.822,20.11-44.822,44.828 c0,24.714,20.107,44.82,44.822,44.82C70.139,309.648,90.244,289.542,90.244,264.828z" />
+            <path d="M5.648,169.43c35.961,0,69.782,14.066,95.231,39.605c25.45,25.583,39.467,59.648,39.467,95.92 c0,2.762,2.238,5,5,5h57.486c2.762,0,5-2.238,5-5c0-111.952-90.699-203.031-202.185-203.031c-2.762,0-5,2.238-5,5v57.505 C0.648,167.191,2.887,169.43,5.648,169.43z" />
+            <path d="M5.726,0c-2.762,0-5,2.238-5,5v57.495c0,2.762,2.238,5,5,5c130.24,0,236.199,106.544,236.199,237.505 c0,2.762,2.238,5,5,5h57.471c2.762,0,5-2.238,5-5C309.396,136.822,173.17,0,5.726,0z" />
+          </g>
+        </svg></a>
+    </nav>
+  </header>
+
+  <main>
+    <header>
+      <h1>How to Embed a Google Drive Folder in a Web Page</h1>
+      <time datetime="2023-04-03">April 3, 2023</time>
+    </header>
+    <h2>Overview</h2>
+    <p>You have a folder in Google Drive that you'd like to insert in a web page. The problem is you can't find an official embed code or anything documented in <a href="https://support.google.com/drive">Google Drive Help</a> articles. Here's an embed code generator and a step-by-step guide to inserting your Google Drive folder in a website.</p>
+    <h2>Instructions</h2>
+    <ol>
+      <li>Go to Google Drive.</li>
+      <li>Right-click on the folder.</li>
+      <li>Select <strong>Share</strong>.</li>
+      <li>Open the <strong>General access</strong> drop-down menu.</li>
+      <li>Select <strong>Anyone with the link</strong> to publish your folder.
+        <p><strong>Note</strong>: Instead, you may want to share your folder only with specific people or groups, and even change its sharing permissions. See <a href="https://support.google.com/drive/answer/7166529">Share folders in Google Drive</a> for more information.</p>
+      </li>
+      <li>Click <strong>Copy link</strong> and then <strong>Done</strong>. Here's a sample folder link: <code>https://drive.google.com/drive/folders/1qGwpjmQIQO8rN1odas0njDSf72VRrTCa?usp=sharing</code>
+        <img src="/images/published-folder.png" width="508" height="415" alt="Published folder">
+      </li>
+      <li>Insert the link in the following embed code generator and customize the folder size and view type as you wish.
+        <form autocomplete="off">
+          <label for="link">Link</label>
+          <input type="url" id="link">
+          <label for="width">Width</label>
+          <input type="text" value="100%" id="width">
+          <label for="height">Height</label>
+          <input type="text" value="600px" id="height">
+          <label for="view">View</label>
+          <select id="view">
+            <option value="list">List</option>
+            <option value="grid">Grid</option>
+          </select>
+          <label for="code">Code</label>
+          <output for="link width height view" id="code"></output>
+          <button type="button" disabled>Copy</button>
+        </form>
+      </li>
+      <li>Copy the code and add it to your page source code.</li>
+    </ol>
+    <h2>Result</h2>
+    <iframe src="https://drive.google.com/embeddedfolderview?id=1qGwpjmQIQO8rN1odas0njDSf72VRrTCa#list" style="width: 100%; height: 440px; border: 0;"></iframe>
+    <footer>
+      <span>Comment</span>
+<svg style="margin-right: 1em;" version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#333"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g> <path fill-rule="evenodd" clip-rule="evenodd" d="M60,0H4C1.789,0,0,1.789,0,4v40c0,2.211,1.789,4,4,4h8v12 c0,1.617,0.973,3.078,2.469,3.695C14.965,63.902,15.484,64,16,64c1.039,0,2.062-0.406,2.828-1.172L33.656,48H60c2.211,0,4-1.789,4-4 V4C64,1.789,62.211,0,60,0z"></path> </g></svg>
+      <span>Share</span>
+      <a href=""><svg fill="#333" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M1920 311.856c-70.701 33.769-146.598 56.47-226.221 66.86 81.317-52.517 143.774-135.529 173.252-234.691-76.236 48.678-160.716 84.028-250.391 103.002-71.718-82.56-174.268-134.06-287.435-134.06-217.75 0-394.165 189.966-394.165 424.206 0 33.318 3.614 65.619 10.165 96.678C617.9 616.119 327.304 447.385 133.045 190.67c-33.77 62.57-53.309 135.53-53.309 213.233 0 147.162 91.031 276.818 196.744 353.054-64.602-2.26-157.101-21.46-157.101-53.309v5.648c0 205.327 114.41 376.658 294.55 415.849-32.978 9.487-78.38 14.795-114.409 14.795-25.412 0-55.454-2.71-79.624-7.793 50.26 168.509 193.13 291.163 365.478 294.777-134.852 113.506-306.07 181.383-490.616 181.383-31.85 0-64.038-2.033-94.758-5.873 174.494 120.17 381.176 190.532 603.67 190.532 724.97 0 1121.055-646.136 1121.055-1206.55 0-18.41-.452-36.932-1.356-55.116 77.026-59.746 143.887-134.4 196.631-219.444" fill-rule="evenodd" />
+          </g>
+        </svg></a>
+      <a href=""><svg fill="#333" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 94 94" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M89,0H5C2.239,0,0,2.239,0,5v84c0,2.761,2.239,5,5,5h84c2.762,0,5-2.239,5-5V5C94,2.239,91.762,0,89,0z M66.93,21.364 l-7.226,0.003c-5.664,0-6.761,2.692-6.761,6.643v8.711h13.511L66.45,50.365H52.943v35.012H38.852V50.365H27.07V36.721h11.782 V26.659c0-11.677,7.133-18.036,17.548-18.036L66.93,8.64V21.364z" />
+          </g>
+        </svg></a>
+      <a href=""><svg fill="#333" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M72.16,99.73H9.927c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5H72.16c2.762,0,5-2.238,5-5V104.73 C77.16,101.969,74.922,99.73,72.16,99.73z" />
+            <path d="M41.066,0.341C18.422,0.341,0,18.743,0,41.362C0,63.991,18.422,82.4,41.066,82.4 c22.626,0,41.033-18.41,41.033-41.038C82.1,18.743,63.692,0.341,41.066,0.341z" />
+            <path d="M230.454,94.761c-24.995,0-43.472,10.745-54.679,22.954V104.73c0-2.761-2.238-5-5-5h-59.599 c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5h62.097c2.762,0,5-2.238,5-5v-98.918c0-33.333,9.054-46.319,32.29-46.319 c25.306,0,27.317,20.818,27.317,48.034v97.204c0,2.762,2.238,5,5,5H305c2.762,0,5-2.238,5-5V194.995 C310,145.43,300.549,94.761,230.454,94.761z" />
+          </g>
+        </svg></a>
+      <a href=""><svg width="16px" height="16px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#333">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <polygon points="6,6.3818359 12,2.0180664 12,1 0,1 0,2.0181274" />
+            <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725" />
+          </g>
+        </svg></a>
+      <button type="button"><svg fill="#333" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve" stroke="#333" style="transform: matrix(-1, 0, 0, 1, 0, 0)">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M109.722,197.008c-24.163-24.164-23.933-63.574,0.682-87.452c23.912-23.195,62.922-22.505,86.96,1.531l53.695,53.696 c12.68,12.68,33.199,12.679,45.877,0.001l19.383-19.383c12.68-12.679,12.679-33.2,0-45.877l-54.556-54.556 c-60.404-60.404-158.638-59.822-218.363,1.074c-58.744,59.894-57.721,157.439,2.281,217.44l53.339,53.339 c12.68,12.68,33.2,12.679,45.877,0.001l19.383-19.382c12.68-12.68,12.679-33.2,0-45.876L109.722,197.008z" />
+            <path d="M467.018,250.225l-54.555-54.555c-12.68-12.68-33.199-12.679-45.877-0.001l-19.383,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l54.556,54.558c24.167,24.164,23.933,63.575-0.682,87.45 c-23.913,23.195-62.922,22.505-86.958-1.531l-53.696-53.696c-12.68-12.68-33.199-12.679-45.876,0l-19.384,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l53.34,53.339c60.005,60.008,157.551,61.021,217.44,2.282 C526.933,408.77,527.41,310.616,467.018,250.225z" />
+            <path d="M178.901,160.024l-19.384,19.383c-12.647,12.648-12.647,33.227,0.001,45.875l127.186,127.185 c12.678,12.681,33.199,12.68,45.877,0.001l19.383-19.381c12.68-12.68,12.679-33.2,0-45.877L224.777,160.023 C212.127,147.376,191.548,147.376,178.901,160.024z" />
+          </g>
+        </svg></button>
+      <span id="notification" hidden>Copied!</span>
+    </footer>
+  </main>
+  <footer>
+    <div>
+      <a href="/blog">Blog</a>
+      <address>
+        Contact
+        <a href="https://t.me/MortezaMirmojarabian" rel="author"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16px" height="16px" viewBox="0 0 256 256" xml:space="preserve">
+            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+              <path d="M 83.924 7.756 L 4.202 38.496 c -5.442 2.183 -5.409 5.219 -0.992 6.571 l 20.455 6.385 l 7.035 23.153 c 0.925 2.553 0.469 3.566 3.151 3.566 c 2.069 0 2.983 -0.946 4.138 -2.069 l 9.941 -9.666 l 20.681 15.28 c 3.806 2.1 6.553 1.012 7.501 -3.533 l 13.577 -63.978 C 91.079 8.631 87.565 6.103 83.924 7.756 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: silver; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+              <path d="M 33.942 72.016 l -6.747 -22.204 L 79.13 19.002 L 40.751 56.789 L 33.942 72.016 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #333; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+            </g>
+          </svg></a>
+        <a href="mailto:morteza.mirmojarabian@gmail.com" rel="author"><svg width="16px" height="16px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="silver">
+            <g stroke-width="0" />
+            <g stroke-linecap="round" stroke-linejoin="round" />
+            <g>
+              <polygon points="6,6.3818359 12,2.0180664 12,1 0,1 0,2.0181274" />
+              <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725" />
+            </g>
+          </svg></a>
+      </address>
+    </div>
+  </footer>
+  <script>
+    var output = document.querySelector('output'),
+      formButton = document.querySelector('form button');
+
+    document.querySelector('form').addEventListener('input', function() {
+      var link = document.getElementById('link');
+      if (link.value && link.validity.valid) {
+        output.value = `<iframe src="https://drive.google.com/embeddedfolderview?id=${new URL(link.value).pathname.split('/').pop()}#${document.querySelector('select').value}" style="width: ${document.getElementById('width').value}; height: ${document.getElementById('height').value}; border: 0;"></iframe>`;
+        formButton.disabled = false;
+      } else {
+        link.reportValidity();
+        output.value = '';
+        formButton.disabled = true;
+      }
+    });
+
+    formButton.addEventListener('click', function() {
+      navigator.clipboard.writeText(output.value);
+      this.textContent = 'Copied!';
+      setTimeout(() => {
+        this.textContent = 'Copy';
+      }, 1500);
+    });
+  </script>
+  <script src="/posts.js"></script>
+</body>
+
+</html>
