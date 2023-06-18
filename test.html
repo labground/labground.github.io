@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>HTML Document Template</title>
+  <style>
+    details,
+    summary {
+      display: inline-flex;
+    }
+
+    summary {
+      padding: 8px 12px;
+      border-radius: 5px;
+      background: linear-gradient(#eee, #ddd);
+      color: #333;
+      font: bold 1rem monospace;
+      text-shadow: 0 1px white;
+      cursor: pointer;
+    }
+
+    details#italic summary,
+    details#italic[open] ~ p {
+      font-style: italic;
+    }
+
+    details#underline summary,
+    details#underline[open] ~ p {
+      text-decoration: underline;
+    }
+
+    details#theme {
+      float: right;
+    }
+
+    details#theme summary::before {
+      content: '☀️';
+      margin-right: 0.5em;
+    }
+
+    details[open]:not(#theme) summary {
+      background: dodgerBlue;
+      color: white;
+      text-shadow: 0 1px black;
+    }
+
+    details#theme[open] summary::before {
+      content: '🌙';
+    }
+
+    details#bold[open] ~ p {
+      font-weight: bold;
+    }
+
+    details#theme[open] ~ p {
+      background: #333;
+      color: white;
+    }
+
+    p {
+      font: 1em/1.5 Arial;
+      padding: 1em;
+      border-radius: 5px;
+      background: #efefef;
+    }
+  </style>
+</head>
+
+<body>
+  <details id="bold">
+    <summary>B</summary>
+  </details>
+
+  <details id="italic">
+    <summary>I</summary>
+  </details>
+
+  <details id="underline">
+    <summary>U</summary>
+  </details>
+
+  <details id="theme">
+    <summary>Theme</summary>
+  </details>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</body>
+
+</html>
