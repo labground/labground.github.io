@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A CSS workaround to create a toggle button with the &lt;details&gt; HTML element for those who can't use JavaScript">
+  <title>Create a CSS toggle button with the &lt;details&gt; element - Mori</title>
+<base href="https://mori.pages.dev/">
+  <link rel="icon" type="image/png" href="/images/m.png">
+  <link rel="stylesheet" href="/posts.css">
+<style>
+details.basic[open] summary {
+  color: red;
+}
+
+details.basic[open] ~ p {
+  color: blue;
+}
+
+details.button summary {
+      display: inline-block;
+    }
+
+    details span {
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 10px;
+      background: linear-gradient(#eee, #ddd);
+      font: bold 72px monospace;
+      text-shadow: 0 1px white;
+    }
+
+    #on,
+    details[open] #off {
+      display: none;
+    }
+
+    details[open] #on {
+      display: inline-block;
+    }
+
+details.light summary {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+details.light img {
+  transition: 0.3s linear;
+}
+
+[alt="Light off"] {
+  position: absolute;
+}
+
+[alt="Light on"],
+details[open] [alt="Light off"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+details[open] [alt="Light on"] {
+  visibility: visible;
+  opacity: 1;
+}
+
+details.switch summary {
+  display: inline-block;
+  padding: 16px 32px;
+  border-radius: 16px;
+  background: radial-gradient(circle 12px, white 100%, transparent calc(100% + 1px)) #ccc -16px;
+  transition: 0.3s ease-in-out;
+}
+
+details.switch[open] summary {
+  background-color: dodgerBlue;
+  background-position: 16px;
+}
+
+details[id],
+details[id] summary {
+  display: inline-flex;
+}
+
+details[id] summary {
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: linear-gradient(#eee, #ddd);
+  color: #333;
+  font: bold 1rem monospace;
+  text-shadow: 0 1px white;
+}
+
+details#italic summary,
+details#italic[open] ~ p {
+  font-style: italic;
+}
+
+details#underline summary,
+details#underline[open] ~ p {
+  text-decoration: underline;
+}
+
+details#theme {
+  float: right;
+}
+
+details#theme summary::before {
+  content: '☀️';
+  margin-right: 0.5em;
+}
+
+details[id][open]:not(#theme) summary {
+  background: dodgerBlue;
+  color: white;
+  text-shadow: 0 1px black;
+}
+
+details#theme[open] summary::before {
+  content: '🌙';
+}
+
+details#bold[open] ~ p {
+  font-weight: bold;
+}
+
+details#theme[open] ~ p {
+  background: #333;
+  color: white;
+}
+
+details[id] ~ p {
+  padding: 1em;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="/"><img src="/images/m.png" width="32" height="32" alt="Logo"></a>
+      <a href="/">Home</a>
+      |
+      <a href="/blog">Blog</a>
+      Follow
+      <a href="https://twitter.com/Mirmojarabian"><svg fill="silver" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M1920 311.856c-70.701 33.769-146.598 56.47-226.221 66.86 81.317-52.517 143.774-135.529 173.252-234.691-76.236 48.678-160.716 84.028-250.391 103.002-71.718-82.56-174.268-134.06-287.435-134.06-217.75 0-394.165 189.966-394.165 424.206 0 33.318 3.614 65.619 10.165 96.678C617.9 616.119 327.304 447.385 133.045 190.67c-33.77 62.57-53.309 135.53-53.309 213.233 0 147.162 91.031 276.818 196.744 353.054-64.602-2.26-157.101-21.46-157.101-53.309v5.648c0 205.327 114.41 376.658 294.55 415.849-32.978 9.487-78.38 14.795-114.409 14.795-25.412 0-55.454-2.71-79.624-7.793 50.26 168.509 193.13 291.163 365.478 294.777-134.852 113.506-306.07 181.383-490.616 181.383-31.85 0-64.038-2.033-94.758-5.873 174.494 120.17 381.176 190.532 603.67 190.532 724.97 0 1121.055-646.136 1121.055-1206.55 0-18.41-.452-36.932-1.356-55.116 77.026-59.746 143.887-134.4 196.631-219.444" fill-rule="evenodd" />
+          </g>
+        </svg></a>
+      <a href="https://www.facebook.com/MortezaMirmojarabian"><svg fill="silver" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 94 94" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M89,0H5C2.239,0,0,2.239,0,5v84c0,2.761,2.239,5,5,5h84c2.762,0,5-2.239,5-5V5C94,2.239,91.762,0,89,0z M66.93,21.364 l-7.226,0.003c-5.664,0-6.761,2.692-6.761,6.643v8.711h13.511L66.45,50.365H52.943v35.012H38.852V50.365H27.07V36.721h11.782 V26.659c0-11.677,7.133-18.036,17.548-18.036L66.93,8.64V21.364z" />
+          </g>
+        </svg></a>
+      <a href="https://www.linkedin.com/in/mortezamirmojarabian"><svg fill="silver" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M72.16,99.73H9.927c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5H72.16c2.762,0,5-2.238,5-5V104.73 C77.16,101.969,74.922,99.73,72.16,99.73z" />
+            <path d="M41.066,0.341C18.422,0.341,0,18.743,0,41.362C0,63.991,18.422,82.4,41.066,82.4 c22.626,0,41.033-18.41,41.033-41.038C82.1,18.743,63.692,0.341,41.066,0.341z" />
+            <path d="M230.454,94.761c-24.995,0-43.472,10.745-54.679,22.954V104.73c0-2.761-2.238-5-5-5h-59.599 c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5h62.097c2.762,0,5-2.238,5-5v-98.918c0-33.333,9.054-46.319,32.29-46.319 c25.306,0,27.317,20.818,27.317,48.034v97.204c0,2.762,2.238,5,5,5H305c2.762,0,5-2.238,5-5V194.995 C310,145.43,300.549,94.761,230.454,94.761z" />
+          </g>
+        </svg></a>
+      <a href="https://groups.google.com/g/newsletter-mori"><svg width="16px" height="16px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="silver">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <polygon points="6,6.3818359 12,2.0180664 12,1 0,1 0,2.0181274" />
+            <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725" />
+          </g>
+        </svg></a>
+      <a href="/rss.xml"><svg fill="silver" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M90.244,264.828C90.244,240.11,70.139,220,45.427,220c-24.715,0-44.822,20.11-44.822,44.828 c0,24.714,20.107,44.82,44.822,44.82C70.139,309.648,90.244,289.542,90.244,264.828z" />
+            <path d="M5.648,169.43c35.961,0,69.782,14.066,95.231,39.605c25.45,25.583,39.467,59.648,39.467,95.92 c0,2.762,2.238,5,5,5h57.486c2.762,0,5-2.238,5-5c0-111.952-90.699-203.031-202.185-203.031c-2.762,0-5,2.238-5,5v57.505 C0.648,167.191,2.887,169.43,5.648,169.43z" />
+            <path d="M5.726,0c-2.762,0-5,2.238-5,5v57.495c0,2.762,2.238,5,5,5c130.24,0,236.199,106.544,236.199,237.505 c0,2.762,2.238,5,5,5h57.471c2.762,0,5-2.238,5-5C309.396,136.822,173.17,0,5.726,0z" />
+          </g>
+        </svg></a>
+    </nav>
+  </header>
+
+  <main>
+    <header>
+      <h1>Create a CSS toggle button with the &lt;details&gt; element</h1>
+      <time datetime="2023-06-27">June 27, 2023</time>
+    </header>
+    <h2>Overview</h2>
+    <p>If for some reason you can't use JavaScript, the following workaround is your best bet to create a toggle button. The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"><code>&lt;details&gt;</code></a> HTML element creates a disclosure widget to hide and show content. We're going to (ab)use the <code>&lt;details&gt;</code> element and some CSS, so let's call it the "details hack".</p>
+    <h2>How it works</h2>
+    <p>Here's a basic example.</p>
+<h3>CSS</h3>
+      <code class="code-block">details[open] summary {
+  color: red;
+}</code>
+<h3>HTML</h3>
+      <code class="code-block">&lt;details&gt;
+  &lt;summary&gt;Toggle&lt;/summary&gt;
+&lt;/details&gt;</code>
+<h3>Result</h3>
+<div class="centered-result">
+<details class="basic">
+    <summary>Toggle</summary>
+  </details>
+</div>
+  <p>Clicking the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary"><code>&lt;summary&gt;</code></a> element toggles the <code>&lt;details&gt;</code>' <code>open</code> attribute and the <code>&lt;summary&gt;</code>'s style. You can also toggle the style of the <code>&lt;details&gt;</code>' next siblings.</p>
+<h3>CSS</h3>
+      <code class="code-block">details[open] summary {
+  color: red;
+}
+
+details[open] ~ p {
+  color: blue;
+}</code>
+<h3>HTML</h3>
+      <code class="code-block">&lt;details&gt;
+  &lt;summary&gt;Toggle&lt;/summary&gt;
+&lt;/details&gt;
+&lt;p&gt;Hello, world!&lt;/p&gt;</code>
+<h3>Result</h3>
+<div class="centered-result">
+<details class="basic">
+  <summary>Toggle</summary>
+</details>
+<p>Hello, world!</p>
+</div>
+<p>This method is basically similar to the <a href="https://css-tricks.com/the-checkbox-hack/">checkbox hack</a>, but the button is keyboard accessible.</p>
+<h3>Notes</h3>
+<ul>
+<li>The <code>&lt;summary&gt;</code>'s contents can be any heading content, plain text, or HTML that can be used within a paragraph.</li>
+<li>The <code>&lt;summary&gt;</code>'s <code>display</code> default value is <code>list-item</code>. To remove the list item's triangle <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker"><code>::marker</code></a>, change the value to <code>inline-flex</code>, for example.
+<code class="code-block">summary {
+  display: inline-flex;
+}</code>
+Alternatively, you may use one of the following rules:
+<code class="code-block">summary {
+  list-style: none;
+}</code>
+<code class="code-block">summary::marker {
+  content: none;
+}</code>
+</li>
+</ul>
+    <h2>More examples</h2>
+  <p>The following demos show the details hack's potential and give you an idea of how to use it.</p>
+<h3>Replace an element</h3>
+<h4>CSS</h4>
+      <code class="code-block">summary {
+  display: inline-block;
+}
+
+span {
+  display: inline-block;
+  padding: 8px 24px;
+  border-radius: 10px;
+  background: linear-gradient(#eee, #ddd);
+  color: #333;
+  font: bold 72px monospace;
+  text-shadow: 0 1px white;
+}
+
+#on,
+details[open] #off {
+  display: none;
+}
+
+details[open] #on {
+  display: inline-block;
+}</code>
+<h4>HTML</h4>
+      <code class="code-block">&lt;details&gt;
+  &lt;summary&gt;&lt;span id=&quot;off&quot;&gt;0&lt;/span&gt;&lt;span id=&quot;on&quot;&gt;1&lt;/span&gt;&lt;/summary&gt;
+&lt;/details&gt;</code>
+<h4>Result</h4>
+<div class="centered-result">
+<details class="button">
+    <summary><span id="off">0</span><span id="on">1</span></summary>
+  </details>
+</div>
+<h3>Replace an element with transition</h3>
+<h4>CSS</h4>
+      <code class="code-block">summary {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+img {
+  transition: 0.3s linear;
+}
+
+[alt="Light off"] {
+  position: absolute;
+}
+
+[alt="Light on"],
+details[open] [alt="Light off"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+details[open] [alt="Light on"] {
+  visibility: visible;
+  opacity: 1;
+}</code>
+<h4>HTML</h4>
+      <code class="code-block">&lt;details&gt;
+  &lt;summary&gt;&lt;img src=&quot;light-off.png&quot; width=&quot;100&quot; height=&quot;180&quot; alt=&quot;Light off&quot;&gt;&lt;img src=&quot;light-on.png&quot; width=&quot;100&quot; height=&quot;180&quot; alt=&quot;Light on&quot;&gt;&lt;/summary&gt;
+&lt;/details&gt;</code>
+<h4>Result</h4>
+<div class="centered-result">
+<details class="light">
+  <summary><img src="/images/light-off.png" width="100" height="180" alt="Light off"><img src="/images/light-on.png" width="100" height="180" alt="Light on"></summary>
+</details>
+</div>
+<h3>A toggle switch</h3>
+<h4>CSS</h4>
+      <code class="code-block">summary {
+  display: inline-block;
+  padding: 16px 32px;
+  border-radius: 16px;
+  background: radial-gradient(circle 12px, white 100%, transparent calc(100% + 1px)) #ccc -16px;
+  transition: 0.3s ease-in-out;
+}
+
+details[open] summary {
+  background-color: dodgerBlue;
+  background-position: 16px;
+}</code>
+<h4>HTML</h4>
+      <code class="code-block">&lt;details&gt;
+  &lt;summary&gt;&lt;/summary&gt;
+&lt;/details&gt;</code>
+<h4>Result</h4>
+<div class="centered-result">
+<details class="switch">
+  <summary></summary>
+</details>
+</div>
+<h3>Multiple buttons</h3>
+<h4>CSS</h4>
+      <code class="code-block">details,
+summary {
+  display: inline-flex;
+}
+
+summary {
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: linear-gradient(#eee, #ddd);
+  color: #333;
+  font: bold 1rem monospace;
+  text-shadow: 0 1px white;
+}
+
+details#italic summary,
+details#italic[open] ~ p {
+  font-style: italic;
+}
+
+details#underline summary,
+details#underline[open] ~ p {
+  text-decoration: underline;
+}
+
+details#theme {
+  float: right;
+}
+
+details#theme summary::before {
+  content: '☀️';
+  margin-right: 0.5em;
+}
+
+details[open]:not(#theme) summary {
+  background: dodgerBlue;
+  color: white;
+  text-shadow: 0 1px black;
+}
+
+details#theme[open] summary::before {
+  content: '🌙';
+}
+
+details#bold[open] ~ p {
+  font-weight: bold;
+}
+
+details#theme[open] ~ p {
+  background: #333;
+  color: white;
+}
+
+p {
+  font: 1em/1.5 Arial;
+  padding: 1em;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}</code>
+<h4>HTML</h4>
+      <code class="code-block">&lt;details id=&quot;bold&quot;&gt;
+  &lt;summary&gt;B&lt;/summary&gt;
+&lt;/details&gt;
+
+&lt;details id=&quot;italic&quot;&gt;
+  &lt;summary&gt;I&lt;/summary&gt;
+&lt;/details&gt;
+
+&lt;details id=&quot;underline&quot;&gt;
+  &lt;summary&gt;U&lt;/summary&gt;
+&lt;/details&gt;
+
+&lt;details id=&quot;theme&quot;&gt;
+  &lt;summary&gt;Theme&lt;/summary&gt;
+&lt;/details&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;</code>
+<h4>Result</h4>
+<details id="bold">
+  <summary>B</summary>
+</details>
+
+<details id="italic">
+  <summary>I</summary>
+</details>
+
+<details id="underline">
+  <summary>U</summary>
+</details>
+
+<details id="theme">
+  <summary>Theme</summary>
+</details>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <footer>
+      <span>Comment</span>
+      <a href="https://github.com/MortezaMirmojarabian/Mori/discussions/1" id="comment"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#333">
+          <g stroke-width="0"></g>
+          <g stroke-linecap="round" stroke-linejoin="round"></g>
+          <g>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M60,0H4C1.789,0,0,1.789,0,4v40c0,2.211,1.789,4,4,4h8v12 c0,1.617,0.973,3.078,2.469,3.695C14.965,63.902,15.484,64,16,64c1.039,0,2.062-0.406,2.828-1.172L33.656,48H60c2.211,0,4-1.789,4-4 V4C64,1.789,62.211,0,60,0z"></path>
+          </g>
+        </svg></a>
+      <span>Share</span>
+      <a href="https://twitter.com/intent/tweet?text=How%20to%20Embed%20a%20Google%20Drive%20Folder%20in%20a%20Web%20Page&url=https%3A%2F%2Fmori.pages.dev%2Fblog%2Fembed-google-drive-folders" target="_blank"><svg fill="#333" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M1920 311.856c-70.701 33.769-146.598 56.47-226.221 66.86 81.317-52.517 143.774-135.529 173.252-234.691-76.236 48.678-160.716 84.028-250.391 103.002-71.718-82.56-174.268-134.06-287.435-134.06-217.75 0-394.165 189.966-394.165 424.206 0 33.318 3.614 65.619 10.165 96.678C617.9 616.119 327.304 447.385 133.045 190.67c-33.77 62.57-53.309 135.53-53.309 213.233 0 147.162 91.031 276.818 196.744 353.054-64.602-2.26-157.101-21.46-157.101-53.309v5.648c0 205.327 114.41 376.658 294.55 415.849-32.978 9.487-78.38 14.795-114.409 14.795-25.412 0-55.454-2.71-79.624-7.793 50.26 168.509 193.13 291.163 365.478 294.777-134.852 113.506-306.07 181.383-490.616 181.383-31.85 0-64.038-2.033-94.758-5.873 174.494 120.17 381.176 190.532 603.67 190.532 724.97 0 1121.055-646.136 1121.055-1206.55 0-18.41-.452-36.932-1.356-55.116 77.026-59.746 143.887-134.4 196.631-219.444" fill-rule="evenodd" />
+          </g>
+        </svg></a>
+      <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fmori.pages.dev%2Fblog%2Fembed-google-drive-folders&t=How%20to%20Embed%20a%20Google%20Drive%20Folder%20in%20a%20Web%20Page" target="_blank"><svg fill="#333" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 94 94" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M89,0H5C2.239,0,0,2.239,0,5v84c0,2.761,2.239,5,5,5h84c2.762,0,5-2.239,5-5V5C94,2.239,91.762,0,89,0z M66.93,21.364 l-7.226,0.003c-5.664,0-6.761,2.692-6.761,6.643v8.711h13.511L66.45,50.365H52.943v35.012H38.852V50.365H27.07V36.721h11.782 V26.659c0-11.677,7.133-18.036,17.548-18.036L66.93,8.64V21.364z" />
+          </g>
+        </svg></a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmori.pages.dev%2Fblog%2Fembed-google-drive-folders" target="_blank"><svg fill="#333" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M72.16,99.73H9.927c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5H72.16c2.762,0,5-2.238,5-5V104.73 C77.16,101.969,74.922,99.73,72.16,99.73z" />
+            <path d="M41.066,0.341C18.422,0.341,0,18.743,0,41.362C0,63.991,18.422,82.4,41.066,82.4 c22.626,0,41.033-18.41,41.033-41.038C82.1,18.743,63.692,0.341,41.066,0.341z" />
+            <path d="M230.454,94.761c-24.995,0-43.472,10.745-54.679,22.954V104.73c0-2.761-2.238-5-5-5h-59.599 c-2.762,0-5,2.239-5,5v199.928c0,2.762,2.238,5,5,5h62.097c2.762,0,5-2.238,5-5v-98.918c0-33.333,9.054-46.319,32.29-46.319 c25.306,0,27.317,20.818,27.317,48.034v97.204c0,2.762,2.238,5,5,5H305c2.762,0,5-2.238,5-5V194.995 C310,145.43,300.549,94.761,230.454,94.761z" />
+          </g>
+        </svg></a>
+      <a href="mailto:?subject=How%20to%20Embed%20a%20Google%20Drive%20Folder%20in%20a%20Web%20Page&body=An%20embed%20code%20generator%20and%20step-by-step%20instructions%20to%20embedding%20your%20Google%20Drive%20folder%20in%20a%20website%0D%0A%0D%0Ahttps%3A%2F%2Fmori.pages.dev%2Fblog%2Fembed-google-drive-folders" target="_blank"><svg width="16px" height="16px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#333">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <polygon points="6,6.3818359 12,2.0180664 12,1 0,1 0,2.0181274" />
+            <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725" />
+          </g>
+        </svg></a>
+      <button type="button"><svg fill="#333" width="16px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve" stroke="#333" style="transform: matrix(-1, 0, 0, 1, 0, 0)">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
+            <path d="M109.722,197.008c-24.163-24.164-23.933-63.574,0.682-87.452c23.912-23.195,62.922-22.505,86.96,1.531l53.695,53.696 c12.68,12.68,33.199,12.679,45.877,0.001l19.383-19.383c12.68-12.679,12.679-33.2,0-45.877l-54.556-54.556 c-60.404-60.404-158.638-59.822-218.363,1.074c-58.744,59.894-57.721,157.439,2.281,217.44l53.339,53.339 c12.68,12.68,33.2,12.679,45.877,0.001l19.383-19.382c12.68-12.68,12.679-33.2,0-45.876L109.722,197.008z" />
+            <path d="M467.018,250.225l-54.555-54.555c-12.68-12.68-33.199-12.679-45.877-0.001l-19.383,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l54.556,54.558c24.167,24.164,23.933,63.575-0.682,87.45 c-23.913,23.195-62.922,22.505-86.958-1.531l-53.696-53.696c-12.68-12.68-33.199-12.679-45.876,0l-19.384,19.383 c-12.647,12.648-12.647,33.227,0.001,45.875l53.34,53.339c60.005,60.008,157.551,61.021,217.44,2.282 C526.933,408.77,527.41,310.616,467.018,250.225z" />
+            <path d="M178.901,160.024l-19.384,19.383c-12.647,12.648-12.647,33.227,0.001,45.875l127.186,127.185 c12.678,12.681,33.199,12.68,45.877,0.001l19.383-19.381c12.68-12.68,12.679-33.2,0-45.877L224.777,160.023 C212.127,147.376,191.548,147.376,178.901,160.024z" />
+          </g>
+        </svg></button>
+      <span id="notification" hidden>Copied!</span>
+    </footer>
+  </main>
+  <footer>
+    <div>
+      <a href="/blog">Blog</a>
+      <address>
+        Contact
+        <a href="https://t.me/MortezaMirmojarabian" rel="author"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 256 256" xml:space="preserve">
+            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+              <path d="M 83.924 7.756 L 4.202 38.496 c -5.442 2.183 -5.409 5.219 -0.992 6.571 l 20.455 6.385 l 7.035 23.153 c 0.925 2.553 0.469 3.566 3.151 3.566 c 2.069 0 2.983 -0.946 4.138 -2.069 l 9.941 -9.666 l 20.681 15.28 c 3.806 2.1 6.553 1.012 7.501 -3.533 l 13.577 -63.978 C 91.079 8.631 87.565 6.103 83.924 7.756 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: silver; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+              <path d="M 33.942 72.016 l -6.747 -22.204 L 79.13 19.002 L 40.751 56.789 L 33.942 72.016 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #333; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+            </g>
+          </svg></a>
+        <a href="mailto:morteza.mirmojarabian@gmail.com" rel="author"><svg width="16px" height="16px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="silver">
+            <g stroke-width="0" />
+            <g stroke-linecap="round" stroke-linejoin="round" />
+            <g>
+              <polygon points="6,6.3818359 12,2.0180664 12,1 0,1 0,2.0181274" />
+              <polygon points="6,7.6181641 0,3.2543335 0,11 12,11 12,3.2542725" />
+            </g>
+          </svg></a>
+      </address>
+    </div>
+  </footer>
+  <script src="/posts.js"></script>
+</body>
+
+</html>
