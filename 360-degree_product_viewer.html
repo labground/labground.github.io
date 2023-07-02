@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>360-degree Product Viewer</title>
+  <link rel="icon" href="/images/lab.svg" type="image/svg+xml">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    div {
+      background: url('/images/car-sprite.png') 0 0 / cover;
+      max-width: 512px;
+      aspect-ratio: 512 / 384;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div></div>
+  <input type="range" value="0" max="35">
+
+  <script>
+    document.querySelector('input').addEventListener('input', function() {
+      document.querySelector('div').style.backgroundPositionX = this.value * 100/35 + '%';
+    });
+  </script>
+
+</body>
+
+</html>
