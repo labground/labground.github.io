@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Edit your HTML, CSS, and JavaScript code and monitor the instant live preview.">
+  <title>HTML Editor: online HTML editor with real-time preview</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header,
+    footer:not([hidden]) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      padding: 5px;
+    }
+
+    header {
+      background: linear-gradient(#FFF, #CCC);
+    }
+
+    label,
+    #download,
+    #fontSize,
+    #reset,
+    #select,
+    #chooseFile,
+    output,
+    span {
+      font: bold 11px Arial;
+      color: #333;
+    }
+
+    [type="checkbox"] {
+      margin: 0 5px 0 0;
+    }
+
+    [for="fontSize"] {
+      margin-left: 5px;
+    }
+
+    #fontSize,
+    button,
+    #textareaSize {
+      margin: 0;
+    }
+
+    #chooseFile {
+      margin: 0 auto 0 0;
+    }
+
+    #textareaSize,
+    iframe {
+      padding: 0;
+    }
+
+    output {
+      margin-right: 5px;
+      font-family: monospace;
+    }
+
+    #footerToggle {
+      width: 16px;
+      height: 16px;
+      border: 1px solid #666;
+      border-bottom-width: 5px;
+      padding: 0;
+      background: transparent;
+    }
+
+    #footerToggle.on {
+      border-color: #333;
+      background: #FFF;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+    }
+
+    main.horizontal {
+      flex-direction: column;
+    }
+
+    div {
+      flex: 0px;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    #iframeWrap {
+      border-left: 5px solid #CCC;
+    }
+
+    main.horizontal #iframeWrap {
+      border-left: 0;
+      border-top: 5px solid #CCC;
+    }
+
+    div * {
+      display: block;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+      background: #FFF;
+    }
+
+    textarea {
+      box-sizing: border-box;
+      padding: 5px;
+      outline: 0;
+      resize: none;
+      font-size: 14px;
+      color: #333;
+    }
+
+    textarea.dark {
+      background: #333;
+      color: #FFF;
+    }
+
+    footer {
+      background: linear-gradient(#CCC, #FFF);
+    }
+
+    img {
+      display: block;
+    }
+
+    #copy {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    address {
+      margin-left: auto;
+      font: italic 16px 'Times New Roman';
+      color: #333;
+    }
+
+    address a {
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <label for="run">Run</label>
+    <input type="checkbox" id="run" checked>
+    <a href="" download="template.html" title="Download the HTML document" id="download">Download</a>
+    <label for="fontSize">Font size</label>
+    <select id="fontSize">
+      <option>12</option>
+      <option>13</option>
+      <option selected>14</option>
+      <option>15</option>
+      <option>16</option>
+      <option>17</option>
+      <option>18</option>
+      <option>19</option>
+      <option>20</option>
+    </select>
+    <button type="button" id="reset">Reset</button>
+    <button type="button" id="select">Select</button>
+    <input type="file" accept="text/html" id="chooseFile">
+    <label for="textareaSize">Textarea size</label>
+    <input type="range" id="textareaSize">
+    <output for="textareaSize">0.50</output>
+    <label for="viewsToggle">Horizontal view</label>
+    <input type="checkbox" id="viewsToggle">
+    <label for="themesToggle">Dark theme</label>
+    <input type="checkbox" id="themesToggle">
+    <button type="button" title="Toggle footer" id="footerToggle"></button>
+  </header>
+  <main>
+    <div id="textareaWrap">
+      <textarea spellcheck="false"><!doctype html>
+<html lang="en">
+<head>
+  <title>HTML Document Template</title>
+  <style>
+    p {
+      font-family: Arial;
+    }
+  </style>
+</head>
+<body>
+  <p>Hello, world!</p>
+  <script>
+    console.log(document.querySelector('p').textContent);
+  </script>
+</body>
+</html></textarea>
+    </div>
+    <div id="iframeWrap">
+      <iframe></iframe>
+    </div>
+  </main>
+  <footer hidden>
+    <span>Share</span>
+    <a href="https://twitter.com/intent/tweet?text=HTML%20Editor%3A%20online%20HTML%20editor%20with%20real-time%20preview&url=https%3A%2F%2Fhtmleditor.gitlab.io" target="_blank"><img src="images/twitter.svg" width="16" height="16" alt="Twitter"></a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fhtmleditor.gitlab.io&t=HTML%20Editor%3A%20online%20HTML%20editor%20with%20real-time%20preview" target="_blank"><img src="images/facebook.svg" width="16" height="16" alt="Facebook"></a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fhtmleditor.gitlab.io" target="_blank"><img src="images/linkedin.svg" width="16" height="16" alt="LinkedIn"></a>
+    <a href="mailto:?subject=HTML%20Editor%3A%20online%20HTML%20editor%20with%20real-time%20preview&body=https%3A%2F%2Fhtmleditor.gitlab.io" target="_blank"><img src="images/email.svg" width="16" height="16" alt="Email"></a>
+    <button type="button" id="copy"><img src="images/link.svg" width="16" height="16" alt="Link"></button>
+    <span id="notification" hidden>Copied!</span>
+    <address><a href="https://codereview.stackexchange.com/questions/284918/html-editor-online-html-editor-with-real-time-preview" title="Code Review Stack Exchange">Feedback</a> | Created by <a href="https://mori.pages.dev" rel="author">Mori</a></address>
+  </footer>
+  <script>
+    var run = document.getElementById('run'),
+      textarea = document.querySelector('textarea'),
+      download = document.getElementById('download'),
+      chooseFile = document.getElementById('chooseFile');
+
+    function preview() {
+      if (run.checked) {
+        document.querySelector('iframe').srcdoc = textarea.value;
+      }
+    }
+
+    textarea.addEventListener('input', preview);
+    run.addEventListener('change', preview);
+
+    ['click', 'contextmenu'].forEach(event => download.addEventListener(event, function() {
+      var blob = new Blob([textarea.value], {type: 'text/html'});
+      this.href = URL.createObjectURL(blob);
+    }));
+
+    document.getElementById('fontSize').addEventListener('change', function() {
+      textarea.style.fontSize = this.value + 'px';
+    });
+
+    document.getElementById('reset').addEventListener('click', function() {
+      chooseFile.value = '';
+      download.download = 'template.html';
+      if (!textarea.value || textarea.value != textarea.defaultValue && confirm('Your input will be lost.\nAre you sure you want to reset?')) {
+        textarea.value = textarea.defaultValue;
+        preview();
+      }
+    });
+
+    document.getElementById('select').addEventListener('click', function() {
+      textarea.select();
+    });
+
+    chooseFile.addEventListener('change', async function() {
+      var file = this.files[0];
+      if (file) { // to ensure that there's a file to read so Chrome, for example, doesn't run this function when you cancel choosing a new file
+        download.download = file.name;
+        textarea.value = await file.text();
+        preview();
+      }
+    });
+
+    document.getElementById('textareaSize').addEventListener('input', function() {
+      var range = this.value;
+      document.getElementById('textareaWrap').style.flexGrow = range;
+      document.getElementById('iframeWrap').style.flexGrow = 100 - range;
+      document.querySelector('output').value = (range / 100).toFixed(2);
+    });
+
+    document.getElementById('viewsToggle').addEventListener('change', function() {
+      document.querySelector('main').classList.toggle('horizontal');
+    });
+
+    document.getElementById('themesToggle').addEventListener('change', function() {
+      textarea.classList.toggle('dark');
+    });
+
+    document.getElementById('footerToggle').addEventListener('click', function() {
+      this.classList.toggle('on');
+      document.querySelector('footer').toggleAttribute('hidden');
+    });
+
+    document.getElementById('copy').addEventListener('click', function() {
+      navigator.clipboard.writeText(location);
+      function toggleNotification() {
+        document.getElementById('notification').toggleAttribute('hidden');
+      }
+      toggleNotification();
+      setTimeout(toggleNotification, 1500);
+    });
+
+    window.addEventListener('beforeunload', function(event) {
+      if (textarea.value && textarea.value != textarea.defaultValue) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    });
+
+    preview();
+  </script>
+</body>
+
+</html>
