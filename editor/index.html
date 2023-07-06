@@ -211,7 +211,7 @@
 </html></textarea>
     </div>
     <div id="iframeWrap">
-      <iframe src="test.html"></iframe>
+      <iframe></iframe>
     </div>
   </main>
   <footer hidden>
@@ -240,7 +240,7 @@
     run.addEventListener('change', preview);
 
     ['click', 'contextmenu'].forEach(event => download.addEventListener(event, function() {
-      var blob = new Blob([textarea.value], {type: 'text/html'});
+      var blob = new Blob([textarea.value], {type: 'text/html; charset=utf-8'});
       this.href = URL.createObjectURL(blob);
     }));
 
