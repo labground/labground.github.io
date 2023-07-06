@@ -240,7 +240,7 @@
     run.addEventListener('change', preview);
 
     ['click', 'contextmenu'].forEach(event => download.addEventListener(event, function() {
-      var blob = new Blob([textarea.value], {type: 'text/html; charset=utf-8'});
+      var blob = new Blob([textarea.value], {type: 'text/html'});
       this.href = URL.createObjectURL(blob);
     }));
 
