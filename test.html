@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>HTML Document Template</title>
+  <style>
+body {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 1em 0.5em;
+}
+
+body.Dark {
+  color: white;
+  background: black;
+}
+  </style>
+</head>
+<body>
+<textarea>Hello, world!</textarea>
+<p></p>
+<input type="range">
+<output></output>
+<input type="checkbox">
+<span></span>
+<select>
+  <option>Light</option>
+  <option>Dark</option>
+</select>
+  <script>
+var textarea = document.querySelector('textarea');
+var p = document.querySelector('p');
+var range = document.querySelector('input[type="range"]');
+var output = document.querySelector('output');
+var checkbox = document.querySelector('input[type="checkbox"]');
+var span = document.querySelector('span');
+var theme = document.querySelector('select');
+
+function write() {
+  p.textContent = textarea.value;
+  output.value = range.value;
+  span.textContent = checkbox.checked;
+  document.body.className = theme.value;
+}
+
+textarea.addEventListener('input', write);
+range.addEventListener('input', write);
+checkbox.addEventListener('change', write);
+theme.addEventListener('change', write);
+
+    window.onload = function() {
+          write();
+    }
+
+  </script>
+</body>
+</html>
