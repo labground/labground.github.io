@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>HTML Document Template</title>
+  <style>
+    textarea,
+    iframe {
+      width: 400px;
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea></textarea>
+  <iframe></iframe>
+  <script>
+    var textarea = document.querySelector('textarea'),
+      iframe = document.querySelector('iframe');
+
+    function preview() {
+      iframe.src = 'about:blank';
+
+      iframe.onload = () => {
+        var iframeDoc = iframe.contentDocument;
+        iframeDoc.open();
+        iframeDoc.write(textarea.value);
+        iframeDoc.close();
+      };
+
+    }
+
+    textarea.addEventListener('input', preview);
+  </script>
+</body>
+
+</html>
