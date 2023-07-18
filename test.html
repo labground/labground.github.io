@@ -21,10 +21,12 @@
 
     function preview() {
 iframe.src = `show.html?uid=${Date.now()}`;
+            iframe.onload = function() {
       var iframeDoc = iframe.contentDocument;
       iframeDoc.open();
       iframeDoc.write(textarea.value);
       iframeDoc.close();
+            };
     }
 
     textarea.addEventListener('input', preview);
