@@ -17,11 +17,10 @@
   <textarea></textarea>
   <iframe></iframe>
   <script>
-    var textarea = document.querySelector('textarea'),
-      iframe = document.querySelector('iframe');
+    var textarea = document.querySelector('textarea');
 
     function preview() {
-      var iframeDoc = iframe.contentDocument;
+      var iframeDoc = document.querySelector('iframe').contentDocument;
       iframeDoc.open();
       iframeDoc.write(textarea.value);
       iframeDoc.close();
