@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Iframe document write doesn't update JavaScript - Labground</title>
+  <link rel="icon" href="/images/lab.svg" type="image/svg+xml">
+  <style>
+    textarea,
+    iframe {
+      width: 400px;
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea></textarea>
+  <iframe></iframe>
+  <script>
+    var textarea = document.querySelector('textarea');
+    var iframe = document.querySelector('iframe');
+
+    function preview() {
+      var iframeDoc = iframe.contentDocument;
+      iframeDoc.open();
+      iframeDoc.write(textarea.value);
+      iframeDoc.close();
+        var scripts = iframeDoc.querySelectorAll('script');
+        scripts.forEach(function(script) {
+          iframe.contentWindow.eval(script.textContent);
+        });
+    }
+
+    textarea.addEventListener('input', preview);
+  </script>
+</body>
+
+</html>
