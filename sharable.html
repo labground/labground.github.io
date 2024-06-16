@@ -331,41 +331,34 @@
       }
     });
 
-// Function to store the current code snippet in localStorage
-function storeCodeLocally() {
-  localStorage.setItem('sharedCode', textarea.value);
-}
-
-// Function to generate a unique identifier (you can adjust this as needed)
-function generateUniqueIdentifier() {
-  return 'code_' + Date.now(); // Example: Using timestamp as a simple unique identifier
-}
-
-// Function to generate and share the code snippet
-function generateShareLink() {
-  const codeIdentifier = generateUniqueIdentifier();
-  localStorage.setItem(codeIdentifier, textarea.value);
-  const shareURL = `${location.origin}${location.pathname}?code=${codeIdentifier}`;
-
-  const shareButton = document.getElementById('share');
-  shareButton.setAttribute('onclick', `window.open('${shareURL}', '_blank')`);
-}
-
-// Function to load shared code snippet from localStorage based on URL parameter
-function loadSharedCode() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const codeIdentifier = urlParams.get('code');
-  if (codeIdentifier && localStorage.getItem(codeIdentifier)) {
-    textarea.value = localStorage.getItem(codeIdentifier);
-    timedPreview(); // Trigger preview if necessary
+  function generateUid() {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let uid = '';
+    for (let i = 0; i < 20; i++) {
+      uid += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return uid;
   }
-}
-
-// Event listener for the share button
-document.getElementById('share').addEventListener('click', generateShareLink);
-
-// Call loadSharedCode function on page load to check for shared code in URL
-window.addEventListener('DOMContentLoaded', loadSharedCode);
+  
+  // Save code snippet to localStorage
+  function saveCodeSnippet(codeSnippet) {
+    const uid = generateUid();
+    localStorage.setItem(uid, codeSnippet);
+    return uid;
+  }
+  
+  // Retrieve code snippet from localStorage by UID
+  function loadCodeSnippet(uid) {
+    return localStorage.getItem(uid);
+  }
+  
+  // Handle share button click
+  document.querySelector('#share-btn').addEventListener('click', function() {
+    const codeSnippet = textarea.value;
+    const uid = saveCodeSnippet(codeSnippet);
+    const shareUrl = `https://labground.github.io/sharable.html/share?code=${encodeURIComponent(uid)}`;
+    clipboard.copyText(shareUrl);
+  });
 
     timedPreview();
   </script>
