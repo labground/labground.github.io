@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share Code with URL Hash</title>
+    <title>Large Code Sharing</title>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string/libs/lz-string.min.js"></script>
 </head>
 <body>
-    <textarea id="code" rows="10" cols="50">Write your code here...</textarea><br>
+    <textarea id="code" rows="10" cols="50">Write your large code snippet here...</textarea><br>
     <button id="share">Generate Shareable URL</button><br>
     <p id="output"></p>
 
     <script>
         document.getElementById('share').addEventListener('click', function () {
             const code = document.getElementById('code').value;
-            const encodedCode = btoa(code); // Base64 encode the code
-            const url = `${window.location.href.split('#')[0]}#${encodedCode}`;
+            const compressedCode = LZString.compressToEncodedURIComponent(code); // Compress and encode
+            const url = `${window.location.href.split('#')[0]}#${compressedCode}`;
             document.getElementById('output').textContent = `Shareable URL: ${url}`;
         });
 
-        function getDecodedCodeFromUrl() {
-            const hash = window.location.hash.substring(1); // Remove the '#' character
+        function decodeCompressedCodeFromUrl() {
+            const hash = window.location.hash.substring(1);
             if (hash) {
-                const decodedCode = atob(hash); // Base64 decode
+                const decodedCode = LZString.decompressFromEncodedURIComponent(hash); // Decode and decompress
                 document.getElementById('code').value = decodedCode;
             }
         }
 
-        window.onload = getDecodedCodeFromUrl;
+        window.onload = decodeCompressedCodeFromUrl;
     </script>
 </body>
 </html>
