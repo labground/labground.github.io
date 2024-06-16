@@ -59,6 +59,9 @@
         // Copy the shareable URL to the clipboard using your preferred method
         // Example: Use the navigator.clipboard API
         navigator.clipboard.writeText(shareUrl);
+        
+        // Update the button text after sharing is complete
+        this.innerText = 'Shared!';
       });
     </script>
 </body>
