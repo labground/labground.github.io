@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Code with URL Hash</title>
+</head>
+<body>
+    <textarea id="code" rows="10" cols="50">Write your code here...</textarea><br>
+    <button id="share">Generate Shareable URL</button><br>
+    <p id="output"></p>
+
+    <script>
+        document.getElementById('share').addEventListener('click', function () {
+            const code = document.getElementById('code').value;
+            const encodedCode = btoa(code); // Base64 encode the code
+            const url = `${window.location.href.split('#')[0]}#${encodedCode}`;
+            document.getElementById('output').textContent = `Shareable URL: ${url}`;
+        });
+
+        function getDecodedCodeFromUrl() {
+            const hash = window.location.hash.substring(1); // Remove the '#' character
+            if (hash) {
+                const decodedCode = atob(hash); // Base64 decode
+                document.getElementById('code').value = decodedCode;
+            }
+        }
+
+        window.onload = getDecodedCodeFromUrl;
+    </script>
+</body>
+</html>
