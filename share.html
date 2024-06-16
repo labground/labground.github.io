@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shared HTML Code</title>
+</head>
+<body>
+<textarea id="textarea" rows="10" cols="50"></textarea>
+<script>
+    const textarea = document.getElementById('textarea');
+
+    function handleSharedUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const uid = urlParams.get('code');
+
+      if (uid) {
+        const codeSnippet = loadCodeSnippet(uid);
+        if (codeSnippet) {
+          textarea.value = codeSnippet;
+        } else {
+          // Handle the case when the shared code snippet is not found
+          // (e.g., display an error message or redirect the user)
+        }
+      }
+    }
+
+    function loadCodeSnippet(uid) {
+      return localStorage.getItem(uid);
+    }
+
+    window.addEventListener('load', handleSharedUrl);
+  </script>
+</body>
+</html>
