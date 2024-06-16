@@ -54,7 +54,7 @@
       document.querySelector('#share-btn').addEventListener('click', function() {
         const codeSnippet = textarea.value;
         const uid = saveCodeSnippet(codeSnippet);
-        const shareUrl = `https://labground.github.io/sharable.html/share?code=${encodeURIComponent(uid)}`;
+        const shareUrl = `https://labground.github.io/share?code=${encodeURIComponent(uid)}`;
         
         // Copy the shareable URL to the clipboard using your preferred method
         // Example: Use the navigator.clipboard API
