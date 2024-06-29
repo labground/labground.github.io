@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Serialization Example</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            gap: 1em 0.5em;
+        }
+        body.Dark {
+            color: white;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <textarea>Hello, world!</textarea>
+    <p></p>
+    <input type="range" min="0" max="100" value="50">
+    <output></output>
+    <input type="checkbox">
+    <span></span>
+    <select>
+        <option>Light</option>
+        <option>Dark</option>
+    </select>
+    <script>
+        var textarea = document.querySelector('textarea');
+        var p = document.querySelector('p');
+        var range = document.querySelector('input[type="range"]');
+        var output = document.querySelector('output');
+        var checkbox = document.querySelector('input[type="checkbox"]');
+        var span = document.querySelector('span');
+        var theme = document.querySelector('select');
+
+        function saveFormState() {
+            const formState = {
+                textarea: textarea.value,
+                range: range.value,
+                checkbox: checkbox.checked,
+                theme: theme.value,
+            };
+            localStorage.setItem('formState', JSON.stringify(formState));
+        }
+
+        function restoreFormState() {
+            const formState = JSON.parse(localStorage.getItem('formState') || '{}');
+            textarea.value = formState.textarea || 'Hello, world!';
+            range.value = formState.range || 50;
+            checkbox.checked = formState.checkbox || false;
+            theme.value = formState.theme || 'Light';
+        }
+
+        function write() {
+            p.textContent = textarea.value;
+            output.value = range.value;
+            span.textContent = checkbox.checked;
+            document.body.className = theme.value;
+            saveFormState();
+        }
+
+        textarea.addEventListener('change', write);
+        range.addEventListener('input', write);
+        checkbox.addEventListener('change', write);
+        theme.addEventListener('change', write);
+
+window.addEventListener('beforeunload', saveFormState);
+
+            restoreFormState();
+            write();
+    </script>
+</body>
+</html>
