@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Serialization Example</title>
+  <style>
+    body {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      gap: 1em 0.5em;
+    }
+
+    body.Dark {
+      color: white;
+      background: black;
+    }
+
+textarea.green {
+  background: green;
+}
+  </style>
+</head>
+
+<body>
+  <textarea>Hello, world!</textarea>
+  <p></p>
+  <input type="range">
+  <output></output>
+  <input type="checkbox">
+  <span></span>
+  <select>
+    <option>Light</option>
+    <option>Dark</option>
+  </select>
+  <script>
+    // Select elements
+    const textarea = document.querySelector('textarea'),
+      p = document.querySelector('p'),
+      range = document.querySelector('input[type="range"]'),
+      output = document.querySelector('output'),
+      checkbox = document.querySelector('input[type="checkbox"]'),
+      span = document.querySelector('span'),
+      theme = document.querySelector('select');
+
+    // Function to save form state to localStorage
+    function saveFormState() {
+      const formState = {
+        textarea: textarea.value,
+        range: range.value,
+        checkbox: checkbox.checked,
+        theme: theme.value,
+      };
+      localStorage.setItem('formState', JSON.stringify(formState));
+    }
+
+    // Function to restore form state from localStorage
+    function restoreFormState() {
+      const formState = JSON.parse(localStorage.getItem('formState'));
+      if (formState) {
+        textarea.value = formState.textarea;
+        range.value = formState.range;
+        checkbox.checked = formState.checkbox;
+        theme.value = formState.theme;
+      }
+    }
+
+    function toggleThemes() {
+      if (checkbox.checked) {
+        textarea.className = 'green';
+      } else {
+        textarea.className = '';
+      }
+    }
+
+    // Function to update the UI and save state
+    function updateFormState() {
+      p.textContent = textarea.value;
+      output.value = range.value;
+      span.textContent = checkbox.checked;
+      document.body.className = theme.value;
+      toggleThemes();
+      saveFormState();
+    }
+
+    // Event listeners to update form state on changes
+    textarea.addEventListener('change', updateFormState);
+    range.addEventListener('change', updateFormState);
+    checkbox.addEventListener('change', updateFormState);
+    theme.addEventListener('change', updateFormState);
+
+    // Save form state on page unload
+    window.addEventListener('beforeunload', saveFormState);
+
+    // Initial load: restore and update form state
+    restoreFormState();
+    updateFormState();
+  </script>
+</body>
+
+</html>
