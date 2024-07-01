@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>HTML Document Template</title>
+</head>
+<body>
+<input type="button" id="ReserveerButton1" value="save" onclick="save()"/>
+<input type="button" id="Wisbutton1" value="delete" onclick="wis()"/>
+<input type="checkbox" id="checkbox1zaal1">
+<textarea>Hello, world!</textarea>
+  <script>
+function save(){
+    var checkbox = document.getElementById('checkbox1zaal1');
+    var textarea = document.querySelector('textarea');
+    localStorage.setItem('checkbox1zaal1', checkbox.checked);
+    localStorage.setItem('box', textarea.value);
+}
+
+function load(){
+    var checked = JSON.parse(localStorage.getItem('checkbox1zaal1'));
+    document.getElementById("checkbox1zaal1").checked = checked;
+    document.querySelector('textarea').value = JSON.parse(localStorage.getItem('box'));
+}
+
+function wis(){
+    location.reload();
+    localStorage.clear();
+}
+
+load();
+  </script>
+</body>
+</html>
