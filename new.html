@@ -341,7 +341,7 @@
     });
 
     document.getElementById('share').addEventListener('click', function() {
-      const code = encodeURIComponent(codeEditor.value);
+      const code = encodeURIComponent(textarea.value);
       const shareURL = `${location.origin}${location.pathname}?code=${code}`;
       navigator.clipboard.writeText(shareURL).then(() => {
         alert('Shareable URL copied to clipboard!');
@@ -352,7 +352,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const sharedCode = urlParams.get('code');
       if (sharedCode) {
-        codeEditor.value = decodeURIComponent(sharedCode);
+        textarea.value = decodeURIComponent(sharedCode);
         timedPreview();
       }
     }
