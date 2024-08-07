@@ -48,7 +48,13 @@
 
   // Copy the shareable identifier to the clipboard.
   function share() {
-    const id = localStorage.keys()[0];
+    // Obtain the first key from localStorage
+    let id = '';
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      id = key;
+      break;
+    }
 
     if (id) {
       navigator.clipboard.writeText(window.location.href + '?id=' + id);
