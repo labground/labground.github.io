@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>HTML Document Template</title>
+  <style>
+textarea,
+iframe {
+  width: 400px;
+  height: 300px;
+}
+
+  </style>
+</head>
+<body>
+<textarea></textarea>
+<iframe src=""></iframe>
+
+  <script>
+var textarea = document.querySelector("textarea");
+var iframe = document.querySelector("iframe");
+var debounceTimer;
+
+function debounce(func, delay) {
+  return function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(func, delay);
+  };
+}
+
+function preview() {
+  var blob = new Blob([textarea.value], { type: "text/html" });
+  var url = URL.createObjectURL(blob);
+  iframe.onload = function () {
+    URL.revokeObjectURL(url);
+  };
+  iframe.src = url;
+}
+
+var debouncedPreview = debounce(preview, 300);
+
+textarea.addEventListener("input", debouncedPreview);
+
+  </script>
+</body>
+</html>
