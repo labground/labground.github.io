@@ -9,22 +9,39 @@
   <link rel="icon" href="/images/lab.svg" type="image/svg+xml">
   <style>
     body {
-      background: url('/images/lab.svg') no-repeat 8px 24px/64px 64px, linear-gradient(#fff, #ccc) fixed;
+      font-family: Arial, sans-serif;
+      color: #333;
+      background: url('/images/lab.svg') no-repeat 8px 24px / 64px 64px, linear-gradient(#fff, #ccc) fixed;
+    }
+
+    h1,
+    p {
+      margin-left: 5rem;
+    }
+
+    h1 {
+      font-size: 24px;
     }
 
     a {
-      margin-left: 64px;
-      font: 16px Arial;
-      color: #333;
+      color: inherit;
       text-underline-position: under;
+    }
+
+    a:hover,
+    a:focus {
+      color: dodgerBlue;
     }
   </style>
 </head>
 
 <body>
-  <p>
-    <a href="https://github.com/labground/labground.github.io">My lab and storage space on GitHub</a>
-  </p>
+  <main>
+    <h1>Welcome to Labground!</h1>
+    <p>
+      <a href="https://github.com/labground/labground.github.io">My lab and storage space on GitHub</a>
+    </p>
+  </main>
 </body>
 
 </html>
