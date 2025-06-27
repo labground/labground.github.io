@@ -1,0 +1,16 @@
+<!-- Related post: https://stackoverflow.com/a/79682412/478018 -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Random Background Color</title>
+</head>
+<body>
+  <script>
+    const rgb = crypto.getRandomValues(new Uint8Array(3));
+    document.body.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+  </script>
+</body>
+</html>
