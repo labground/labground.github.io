@@ -10,8 +10,8 @@
 </head>
 <body>
   <script>
-    const rgb = crypto.getRandomValues(new Uint8Array(3));
-    document.body.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    const [r, g, b] = crypto.getRandomValues(new Uint8Array(3));
+    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   </script>
 </body>
 </html>
