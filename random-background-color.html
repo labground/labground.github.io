@@ -7,11 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Random Background Color - Labground</title>
   <link rel="icon" href="/images/lab.svg" type="image/svg+xml">
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      margin: 0;
+    }
+
+    output {
+      font: 24px monospace;
+      color: #333;
+      background: #FFF;
+      padding: 1em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 2em;
+      margin: auto;
+    }
+  </style>
 </head>
 <body>
+  <output></output>
   <script>
     const [r, g, b] = crypto.getRandomValues(new Uint8Array(3));
-    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    const color = `rgb(${r}, ${g}, ${b})`;
+    document.body.style.backgroundColor = color;
+    document.querySelector('output').value = color;
   </script>
 </body>
 </html>
